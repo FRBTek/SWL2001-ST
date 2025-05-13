@@ -60,6 +60,7 @@
 #endif
 
 #include "modem_pinout.h"
+#include "status_if.h"
 
 // for variadic args
 #include <stdio.h>
@@ -485,7 +486,12 @@ uint8_t smtc_modem_hal_get_battery_level( void )
     // 0: The end-device is connected to an external power source.
     // 1..254: Battery level, where 1 is the minimum and 254 is the maximum.
     // 255: The end-device was not able to measure the battery level.
-    return 255;
+
+    uint8_t bat_level = 255;
+
+    bat_level = status_if_get_battery_level();
+
+    return bat_level;
 }
 
 int8_t smtc_modem_hal_get_board_delay_ms( void )
@@ -565,13 +571,20 @@ uint8_t smtc_modem_hal_get_fw_delete_status_for_fuota( uint32_t fw_to_delete_ver
 
 int8_t smtc_modem_hal_get_temperature( void )
 {
-    // Please implement according to used board
-    return 25;
+    int8_t temp = 0;
+
+    temp = status_get_temperature();
+
+    return temp;
 }
 
 uint16_t smtc_modem_hal_get_voltage_mv( void )
 {
-    return 3300;
+    uint16_t voltage = 3300;
+
+    voltage = status_get_voltage();
+
+    return voltage;
 }
 
 /* ------------ Needed for Store and Forward service  ------------*/

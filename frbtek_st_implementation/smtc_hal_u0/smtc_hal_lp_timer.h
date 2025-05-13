@@ -84,13 +84,6 @@ typedef struct hal_lp_timer_irq_s
  */
 
 /*!
- * \brief Initialize the MCU TMR peripheral
- *
- * \param [in] id Low power timer id
- */
-void hal_lp_timer_init( hal_lp_timer_id_t id );
-
-/*!
  * \brief Start the provided timer objet for the given time
  *
  * \param [in] id           Low power timer id

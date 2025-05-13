@@ -33,7 +33,7 @@ BIN = $(CP) -O binary -S
 # Board selection
 #-----------------------------------------------------------------------------
 
--include makefiles/cortex_m4.mk
+#-include makefiles/cortex_m4.mk
 
 
 #-----------------------------------------------------------------------------
@@ -240,6 +240,28 @@ endif
 ifeq ($(TEST_BYPASS_JOIN_DUTY_CYCLE),yes)
 LBM_C_DEFS += \
 	-DTEST_BYPASS_JOIN_DUTY_CYCLE
+endif
+
+ifeq ($(MCU_ARCH), M0)
+MCU_FLAGS = \
+	-mcpu=cortex-m0 \
+	-mthumb \
+	-mfloat-abi=soft
+endif
+
+ifeq ($(MCU_ARCH), M0+)
+MCU_FLAGS = \
+	-mcpu=cortex-m0plus \
+	-mthumb \
+	-mfloat-abi=soft
+endif
+
+ifeq ($(MCU_ARCH), M4)
+MCU_FLAGS = \
+	-mcpu=cortex-m4 \
+	-mthumb \
+	-mfpu=fpv4-sp-d16 \
+	-mfloat-abi=hard
 endif
 
 #-----------------------------------------------------------------------------

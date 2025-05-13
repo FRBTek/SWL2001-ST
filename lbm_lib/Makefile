@@ -17,9 +17,9 @@ help:
 	$(call echo_help, " * make clean_all                          : clean all")
 	$(call echo_help, "")
 	$(call echo_help_b, "----------------------------- Compilation ----------------------------------")
-	$(call echo_help, " * make basic_modem_<TARGET> MCU_FLAGS=xxx : build basic_modem on a given target with chosen mcu flags")
-	$(call echo_help, " *                                           MCU_FLAGS are mandatory. Ex for stm32l4:")
-	$(call echo_help, " *                                           MCU_FLAGS=\"-mcpu=cortex-m4 -mthumb -mabi=aapcs -mfpu=fpv4-sp-d16 -mfloat-abi=hard\"")
+	$(call echo_help, " * make basic_modem_<TARGET> MCU_ARCH=xxx : build basic_modem on a given target with chosen mcu target")
+	$(call echo_help, " *                                           MCU_ARCH is mandatory. Ex for Cortex-M0:")
+	$(call echo_help, " *                                           MCU_ARCH=\"M0\"")
 	$(call echo_help, "")
 	$(call echo_help_b, "---------------------- Optional build parameters ---------------------------")
 	$(call echo_help, " * REGION=xxx                              : choose which region should be compiled (default: ALL)")
@@ -162,6 +162,10 @@ basic_modem:
 ifeq ($(RADIO),nc)
 	$(call echo_error,"No radio selected! Please specified the target radio  using RADIO=radio_name option")
 else
+ifeq ($(MCU_ARCH), nc)
+	$(call echo_error,"No MCU selected! Please specified the target MCU  using MCU_ARCH=mcu option")
+	exit 1
+endif
 ifneq ($(CRYPTO),SOFT)
 ifeq ($(LBM_RELAY_TX_ENABLE),yes)
 	$(call echo_error, "------------------------------------------------------------")

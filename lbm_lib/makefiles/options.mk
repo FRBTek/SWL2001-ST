@@ -5,6 +5,9 @@
 # Tranceiver
 RADIO ?= nc
 
+# MCU - Architekture
+MCU_ARCH ?= nc
+
 # MCU - Must be provided by user
 MCU_FLAGS ?= nc
 

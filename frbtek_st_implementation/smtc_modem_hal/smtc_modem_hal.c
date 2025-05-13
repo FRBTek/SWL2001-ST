@@ -55,7 +55,7 @@
 #if defined( STM32L073xx )
 #include "smtc_hal_eeprom.h"
 #endif
-#if defined( STM32L476xx )
+#if defined( STM32L476xx ) || defined ( STM32U073xx )
 #include "smtc_hal_flash.h"
 #endif
 
@@ -93,6 +93,13 @@
 #define ADDR_FLASH_MODEM_CONTEXT ADDR_FLASH_PAGE_253
 #define ADDR_FLASH_LORAWAN_CONTEXT ADDR_FLASH_PAGE_254
 #define ADDR_FLASH_MODEM_KEY_CONTEXT ADDR_FLASH_PAGE_255
+#endif
+
+#if defined( STM32U073xx )
+#define ADDR_FLASH_SECURE_ELEMENT_CONTEXT ADDR_FLASH_PAGE_124
+#define ADDR_FLASH_MODEM_CONTEXT ADDR_FLASH_PAGE_125
+#define ADDR_FLASH_LORAWAN_CONTEXT ADDR_FLASH_PAGE_126
+#define ADDR_FLASH_MODEM_KEY_CONTEXT ADDR_FLASH_PAGE_127
 #endif
 
 #if defined( STM32L073xx )
@@ -241,6 +248,25 @@ void smtc_modem_hal_context_restore( const modem_context_type_t ctx_type, uint32
     case CONTEXT_STORE_AND_FORWARD:
         hal_flash_read_buffer( ADDR_FLASH_STORE_AND_FORWARD + offset, buffer, size );
         break;
+#elif defined( STM32U073xx )
+        case CONTEXT_MODEM:
+        hal_flash_read_buffer( ADDR_FLASH_MODEM_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_KEY_MODEM:
+        hal_flash_read_buffer( ADDR_FLASH_MODEM_KEY_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_LORAWAN_STACK:
+        hal_flash_read_buffer( ADDR_FLASH_LORAWAN_CONTEXT + offset, buffer, size );
+        break;
+    case CONTEXT_FUOTA:
+        // no fuota example on stm32U0
+        break;
+    case CONTEXT_SECURE_ELEMENT:
+        hal_flash_read_buffer( ADDR_FLASH_SECURE_ELEMENT_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_STORE_AND_FORWARD:
+        // no store and fw example on stm32U0
+        break;
 #endif
     default:
         mcu_panic( );
@@ -273,6 +299,29 @@ void smtc_modem_hal_context_store( const modem_context_type_t ctx_type, uint32_t
         break;
     case CONTEXT_SECURE_ELEMENT:
         hal_eeprom_write_buffer( ADDR_EEPROM_SECURE_ELEMENT_CONTEXT_OFFSET, buffer, size );
+        break;
+#elif defined( STM32U073xx )
+    case CONTEXT_MODEM:
+        hal_flash_erase_page( ADDR_FLASH_MODEM_CONTEXT, 1 );
+        hal_flash_write_buffer( ADDR_FLASH_MODEM_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_KEY_MODEM:
+        hal_flash_erase_page( ADDR_FLASH_MODEM_KEY_CONTEXT, 1 );
+        hal_flash_write_buffer( ADDR_FLASH_MODEM_KEY_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_LORAWAN_STACK:
+        hal_flash_erase_page( ADDR_FLASH_LORAWAN_CONTEXT, 1 );
+        hal_flash_write_buffer( ADDR_FLASH_LORAWAN_CONTEXT, buffer, size );
+        break;
+    case CONTEXT_FUOTA:
+        // no fuota example on stm32U0
+        break;
+    case CONTEXT_STORE_AND_FORWARD:
+        // no store and fw example on stm32U0
+        break;
+    case CONTEXT_SECURE_ELEMENT:
+        hal_flash_erase_page( ADDR_FLASH_SECURE_ELEMENT_CONTEXT, 1 );
+        hal_flash_write_buffer( ADDR_FLASH_SECURE_ELEMENT_CONTEXT, buffer, size );
         break;
 #elif defined( STM32L476xx )
     case CONTEXT_MODEM:

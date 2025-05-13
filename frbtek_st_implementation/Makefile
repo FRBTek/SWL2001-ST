@@ -26,6 +26,7 @@ help:
 	$(call echo_help, " * BOARD=xxx                       : choose which mcu board will be used:(default is NUCLEO_L476)")
 	$(call echo_help, " *                                  - NUCLEO_L476")
 	$(call echo_help, " *                                  - NUCLEO_L073")
+	$(call echo_help, " *                                  - NUCLEO_U073")
 	$(call echo_help, " * MODEM_APP=xxx                   : choose which modem application to build:(default is PERIODICAL_UPLINK)")
 	$(call echo_help, " *                                  - PERIODICAL_UPLINK")
 	$(call echo_help, " *                                  - HW_MODEM")

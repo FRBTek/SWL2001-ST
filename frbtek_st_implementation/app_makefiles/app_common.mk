@@ -39,6 +39,11 @@ ifeq ($(BOARD),NUCLEO_L073)
 BOARD_TARGET=l0
 endif
 
+ifeq ($(BOARD),NUCLEO_U073)
+-include app_makefiles/board_U073.mk
+BOARD_TARGET=u0
+endif
+
 #-----------------------------------------------------------------------------
 # Define target build directory
 #-----------------------------------------------------------------------------

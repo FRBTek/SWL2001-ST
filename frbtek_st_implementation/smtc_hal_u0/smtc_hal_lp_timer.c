@@ -41,7 +41,7 @@
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_lp_timer.h"
-#include "stm32l4xx_hal.h"
+#include "stm32u0xx_hal.h"
 #include "smtc_hal_mcu.h"
 
 /*
@@ -66,6 +66,8 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
+
+//TODO: add handles from extern
 static LPTIM_HandleTypeDef lptim_handle[HAL_LP_TIMER_NB];
 
 static hal_lp_timer_irq_t lptim_tmr_irq[HAL_LP_TIMER_NB] = {

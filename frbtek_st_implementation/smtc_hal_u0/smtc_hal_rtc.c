@@ -40,8 +40,8 @@
 #include <time.h>
 #include "smtc_hal_rtc.h"
 
-#include "stm32l4xx_hal.h"
-#include "stm32l4xx_ll_rtc.h"
+#include "stm32u0xx_hal.h"
+#include "stm32u0xx_ll_rtc.h"
 #include "smtc_hal_mcu.h"
 
 /*
@@ -113,6 +113,7 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
+//TODO: check for extern
 static RTC_HandleTypeDef hal_rtc_handle;
 static uint32_t          offset_to_test_wrapping = 0;
 /*

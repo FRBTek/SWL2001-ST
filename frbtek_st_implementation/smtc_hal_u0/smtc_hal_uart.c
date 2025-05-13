@@ -41,7 +41,7 @@
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_uart.h"
-#include "stm32l4xx_hal.h"
+#include "stm32u0xx_hal.h"
 #include "smtc_hal_gpio.h"
 
 #include "modem_pinout.h"
@@ -67,6 +67,7 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
+//TODO: check for extern handle
 static DMA_HandleTypeDef hdma_usart4_rx;
 
 static UART_HandleTypeDef huart2;

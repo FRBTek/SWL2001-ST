@@ -40,7 +40,7 @@
 #include <stdint.h>   // C99 types
 #include <stdbool.h>  // bool type
 
-#include "stm32l4xx_hal.h"
+#include "stm32u0xx_hal.h"
 #include "smtc_hal_rng.h"
 
 #include "smtc_hal_mcu.h"
@@ -65,6 +65,7 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
+//TODO: check for extern handle?
 static RNG_HandleTypeDef rng_handle;
 
 /*

@@ -40,7 +40,7 @@
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_gpio.h"
-#include "stm32l4xx_hal.h"
+#include "stm32u0xx_hal.h"
 
 /*
  * -----------------------------------------------------------------------------

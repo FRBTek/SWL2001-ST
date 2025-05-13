@@ -112,10 +112,29 @@ typedef enum gpio_pin_names_e
     PC_14 = 0x2E,
     PC_15 = 0x2F,
     // GPIOD
+    PD_0 = 0x30,
+    PD_1 = 0x31,
     PD_2 = 0x32,
-    // GPIOH
-    PH_0 = 0x70,
-    PH_1 = 0x71,
+    PD_3 = 0x33,
+    PD_4 = 0x34,
+    PD_5 = 0x35,
+    PD_6 = 0x36,
+    PD_8 = 0x38,
+    PD_9 = 0x39,
+    PD_10 = 0x3A,
+    PD_11 = 0x3B,
+    PD_12 = 0x3C,
+    PD_13 = 0x3D,
+    // GPIOE
+    PE_3 = 0x43,
+    PE_7 = 0x47,
+    PE_8 = 0x48,
+    PE_9 = 0x49,
+    // GPIOF
+    PF_0 = 0x50,
+    PF_1 = 0x51,
+    PF_2 = 0x52,
+    PF_3 = 0x53,
     // Not connected
     NC = -1
 } hal_gpio_pin_names_t;

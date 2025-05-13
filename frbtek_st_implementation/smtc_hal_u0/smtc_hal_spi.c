@@ -41,8 +41,8 @@
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_spi.h"
-#include "stm32l4xx_hal.h"
-#include "stm32l4xx_ll_spi.h"
+#include "stm32u0xx_hal.h"
+#include "stm32u0xx_ll_spi.h"
 #include "smtc_hal_gpio.h"
 
 #include "modem_pinout.h"
@@ -63,6 +63,7 @@
  * --- PRIVATE TYPES -----------------------------------------------------------
  */
 
+//TODO: check for extern handle
 typedef struct spi_s
 {
     SPI_TypeDef*      interface;

@@ -37,14 +37,16 @@
  * --- DEPENDENCIES ------------------------------------------------------------
  */
 
+//TODO: check for abstraction an compatibility with cube
+
 #include <stdint.h>   // C99 types
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_mcu.h"
 #include "modem_pinout.h"
 
-#include "stm32l4xx_hal.h"
-#include "stm32l4xx_ll_utils.h"
+#include "stm32u0xx_hal.h"
+#include "stm32u0xx_ll_utils.h"
 
 #include "smtc_hal_uart.h"
 #include "smtc_hal_rtc.h"

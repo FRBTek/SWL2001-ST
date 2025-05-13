@@ -84,15 +84,6 @@ static hal_gpio_irq_t const* gpio_irq[16];
  * --- PRIVATE FUNCTIONS DECLARATION -------------------------------------------
  */
 
-/*!
- * Generic gpio initialization
- *
- * \param [in/out] gpio  Holds MCU gpio parameters
- * \param [in]     value Initial MCU pit value
- * \param [in/out] irq   Pointer to IRQ data context.
- *                         NULL when setting gpio as output
- */
-static void gpio_init( const gpio_t* gpio, const uint32_t value, const hal_gpio_irq_t* irq );
 
 /*
  * -----------------------------------------------------------------------------
@@ -102,33 +93,6 @@ static void gpio_init( const gpio_t* gpio, const uint32_t value, const hal_gpio_
 //
 // MCU input pin Handling
 //
-
-void hal_gpio_init_in( const hal_gpio_pin_names_t pin, const hal_gpio_pull_mode_t pull_mode,
-                       const hal_gpio_irq_mode_t irq_mode, hal_gpio_irq_t* irq )
-{
-    const uint32_t modes[] = { GPIO_MODE_INPUT, GPIO_MODE_IT_RISING, GPIO_MODE_IT_FALLING,
-                               GPIO_MODE_IT_RISING_FALLING };
-    const uint32_t pulls[] = { GPIO_NOPULL, GPIO_PULLUP, GPIO_PULLDOWN };
-
-    gpio_t gpio = {
-        .pin = pin, .mode = modes[irq_mode], .pull = pulls[pull_mode], .speed = GPIO_SPEED_FREQ_LOW, .alternate = 0
-    };
-
-    if( irq != NULL )
-    {
-        irq->pin = pin;
-    }
-
-    gpio_init( &gpio, GPIO_PIN_RESET, irq );
-}
-
-void hal_gpio_init_out( const hal_gpio_pin_names_t pin, const uint32_t value )
-{
-    gpio_t gpio = {
-        .pin = pin, .mode = GPIO_MODE_OUTPUT_PP, .pull = GPIO_NOPULL, .speed = GPIO_SPEED_FREQ_LOW, .alternate = 0
-    };
-    gpio_init( &gpio, ( value != 0 ) ? GPIO_PIN_SET : GPIO_PIN_RESET, NULL );
-}
 
 void hal_gpio_irq_attach( const hal_gpio_irq_t* irq )
 {
@@ -254,86 +218,6 @@ void hal_gpio_enable_clock( const hal_gpio_pin_names_t pin )
  * --- PRIVATE FUNCTIONS DEFINITION --------------------------------------------
  */
 
-static void gpio_init( const gpio_t* gpio, const uint32_t value, const hal_gpio_irq_t* irq )
-{
-    GPIO_InitTypeDef gpio_local;
-    GPIO_TypeDef*    gpio_port = ( GPIO_TypeDef* ) ( AHB2PERIPH_BASE + ( ( gpio->pin & 0xF0 ) << 6 ) );
-
-    gpio_local.Pin       = ( 1 << ( gpio->pin & 0x0F ) );
-    gpio_local.Mode      = gpio->mode;
-    gpio_local.Pull      = gpio->pull;
-    gpio_local.Speed     = gpio->speed;
-    gpio_local.Alternate = gpio->alternate;
-
-    if( gpio_port == GPIOA )
-    {
-        __HAL_RCC_GPIOA_CLK_ENABLE( );
-    }
-    else if( gpio_port == GPIOB )
-    {
-        __HAL_RCC_GPIOB_CLK_ENABLE( );
-    }
-    else if( gpio_port == GPIOC )
-    {
-        __HAL_RCC_GPIOC_CLK_ENABLE( );
-    }
-    else if( gpio_port == GPIOD )
-    {
-        __HAL_RCC_GPIOD_CLK_ENABLE( );
-    }
-    else if( gpio_port == GPIOE )
-    {
-        __HAL_RCC_GPIOE_CLK_ENABLE( );
-    }
-    else if( gpio_port == GPIOH )
-    {
-        __HAL_RCC_GPIOH_CLK_ENABLE( );
-    }
-
-    HAL_GPIO_WritePin( gpio_port, gpio_local.Pin, ( GPIO_PinState ) value );
-    HAL_GPIO_Init( gpio_port, &gpio_local );
-
-    if( ( gpio->mode == GPIO_MODE_IT_RISING ) || ( gpio->mode == GPIO_MODE_IT_FALLING ) ||
-        ( gpio->mode == GPIO_MODE_IT_RISING_FALLING ) )
-    {
-        hal_gpio_irq_attach( irq );
-        switch( gpio->pin & 0x0F )
-        {
-        case 0:
-            HAL_NVIC_SetPriority( EXTI0_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI0_IRQn );
-            break;
-        case 1:
-            HAL_NVIC_SetPriority( EXTI1_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI1_IRQn );
-            break;
-        case 2:
-            HAL_NVIC_SetPriority( EXTI2_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI2_IRQn );
-            break;
-        case 3:
-            HAL_NVIC_SetPriority( EXTI3_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI3_IRQn );
-            break;
-        case 4:
-            HAL_NVIC_SetPriority( EXTI4_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI4_IRQn );
-            break;
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-            HAL_NVIC_SetPriority( EXTI9_5_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI9_5_IRQn );
-            break;
-        default:
-            HAL_NVIC_SetPriority( EXTI15_10_IRQn, 0, 0 );
-            HAL_NVIC_EnableIRQ( EXTI15_10_IRQn );
-            break;
-        }
-    }
-}
 
 /******************************************************************************/
 /* STM32L4xx Peripheral Interrupt Handlers                                    */

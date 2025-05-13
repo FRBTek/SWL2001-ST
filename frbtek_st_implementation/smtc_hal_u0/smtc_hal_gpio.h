@@ -97,33 +97,6 @@ typedef enum gpio_irq_mode_e
  */
 
 /*!
- * Initializes given pin as output with given initial value
- *
- * \param [in] pin   MCU pin to be initialized
- * \param [in] value MCU initial pit state
- *
- */
-void hal_gpio_init_out( const hal_gpio_pin_names_t pin, const uint32_t value );
-
-/*!
- * Initializes given pin as input
- *
- * \param [in]     pin       MCU pin to be initialized
- * \param [in]     pull_mode MCU pin pull mode [BSP_GPIO_PULL_MODE_NONE,
- *                                              BSP_GPIO_PULL_MODE_UP,
- *                                              BSP_GPIO_PULL_MODE_DOWN]
- * \param [in]     irq_mode  MCU IRQ mode [BSP_GPIO_IRQ_MODE_OFF,
- *                                         BSP_GPIO_IRQ_MODE_RISING,
- *                                         BSP_GPIO_IRQ_MODE_FALLING,
- *                                         BSP_GPIO_IRQ_MODE_RISING_FALLING]
- * \param [in/out] irq       Pointer to IRQ data context.
- *                              NULL when BSP_GPIO_IRQ_MODE_OFF
- *                              pin parameter is initialized
- */
-void hal_gpio_init_in( const hal_gpio_pin_names_t pin, const hal_gpio_pull_mode_t pull_mode,
-                       const hal_gpio_irq_mode_t irq_mode, hal_gpio_irq_t* irq );
-
-/*!
  * Attaches given callback to the MCU IRQ handler
  *
  * \param [in] irq     Pointer to IRQ data context

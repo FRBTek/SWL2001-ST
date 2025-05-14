@@ -66,11 +66,6 @@ extern "C" {
  */
 
 /*!
- *  Initializes the MCU RTC peripheral
- */
-void hal_rtc_init( void );
-
-/*!
  * Returns the current RTC time in seconds
  *
  * \remark Used for scheduling autonomous retransmissions (i.e: NbTrans),
@@ -92,18 +87,6 @@ uint32_t hal_rtc_get_time_s( void );
  */
 uint32_t hal_rtc_get_time_ms( void );
 
-/*!
- * Sets the rtc wakeup timer for milliseconds parameter. The RTC will generate
- * an IRQ to wakeup the MCU.
- *
- * \param[IN] milliseconds Number of seconds before wakeup
- */
-void hal_rtc_wakeup_timer_set_ms( const int32_t milliseconds );
-
-/*!
- * Stop the rtc wakeup timer
- */
-void hal_rtc_wakeup_timer_stop( void );
 
 /*!
  * hal to test wrapping

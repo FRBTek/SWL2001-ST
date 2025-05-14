@@ -75,16 +75,6 @@ static IWDG_HandleTypeDef iwdg_handle;
  * --- PUBLIC FUNCTIONS DEFINITION ---------------------------------------------
  */
 
-void hal_watchdog_init( void )
-{
-    iwdg_handle.Instance       = IWDG;
-    iwdg_handle.Init.Prescaler = IWDG_PRESCALER_256;
-    iwdg_handle.Init.Window    = IWDG_WINDOW_DISABLE;
-    iwdg_handle.Init.Reload    = 0xFFF;
-
-    HAL_IWDG_Init( &iwdg_handle );
-}
-
 void hal_watchdog_reload( void )
 {
     HAL_IWDG_Refresh( &iwdg_handle );

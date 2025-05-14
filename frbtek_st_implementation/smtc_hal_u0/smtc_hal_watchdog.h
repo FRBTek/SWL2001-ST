@@ -67,12 +67,6 @@ extern "C" {
  */
 
 /*!
- * Initializes the MCU watchdog peripheral
- */
-
-void hal_watchdog_init( void );
-
-/*!
  * Reloads watchdog counter
  */
 

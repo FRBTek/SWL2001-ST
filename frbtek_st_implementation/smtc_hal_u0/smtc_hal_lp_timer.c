@@ -54,8 +54,6 @@
  * --- PRIVATE CONSTANTS -------------------------------------------------------
  */
 
-#define HAL_LP_TIMER_NB 1  //!< Number of supported low power timers
-
 /*
  * -----------------------------------------------------------------------------
  * --- PRIVATE TYPES -----------------------------------------------------------
@@ -66,19 +64,12 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
+//TODO: Check extern definition
 extern LPTIM_HandleTypeDef lptim1;
 
-static hal_lp_timer_irq_t lptim_tmr_irq[HAL_LP_TIMER_NB] = {
-    {
+static hal_lp_timer_irq_t lptim_tmr_irq = {
         .context  = NULL,
         .callback = NULL,
-    },
-#if( HAL_LP_TIMER_NB > 1 )
-    {
-        .context  = NULL,
-        .callback = NULL,
-    },
-#endif
 };
 
 /*
@@ -91,10 +82,11 @@ static hal_lp_timer_irq_t lptim_tmr_irq[HAL_LP_TIMER_NB] = {
  * --- PUBLIC FUNCTIONS DEFINITION ---------------------------------------------
  */
 
-void hal_lp_timer_start( hal_lp_timer_id_t id, const uint32_t milliseconds, const hal_lp_timer_irq_t* tmr_irq )
+void hal_lp_timer_start( const uint32_t milliseconds, const hal_lp_timer_irq_t* tmr_irq )
 {
     uint32_t delay_ms_2_tick = 0;
 
+    //TODO: CHECK IF LSE_VALUE IS ACCESSIBLE FROM HERE
     // Remark LSE_VALUE / LPTIM_PRESCALER_DIV16
     delay_ms_2_tick = ( uint32_t ) ( ( ( uint64_t ) milliseconds * ( LSE_VALUE >> 4 ) ) / 1000 );
 
@@ -104,9 +96,9 @@ void hal_lp_timer_start( hal_lp_timer_id_t id, const uint32_t milliseconds, cons
         delay_ms_2_tick = 0xFFFF;
     }
 
-    // Auto reload period is set to max value 0xFFFF
-    HAL_LPTIM_TimeOut_Start_IT( &lptim1, 0xFFFF, delay_ms_2_tick );
-    lptim_tmr_irq[0] = *tmr_irq;
+    // TODO: CHECK INITIAL RELOAD VALUE
+    HAL_LPTIM_TimeOut_Start_IT( &lptim1, delay_ms_2_tick );
+    lptim_tmr_irq = *tmr_irq;
 }
 
 void hal_lp_timer_stop( hal_lp_timer_id_t id )
@@ -116,12 +108,12 @@ void hal_lp_timer_stop( hal_lp_timer_id_t id )
 
 void hal_lp_timer_irq_enable( hal_lp_timer_id_t id )
 {
-    HAL_NVIC_EnableIRQ( ( id == 0 ) ? LPTIM1_IRQn : LPTIM2_IRQn );
+    HAL_NVIC_EnableIRQ(LPTIM1_IRQn);
 }
 
 void hal_lp_timer_irq_disable( hal_lp_timer_id_t id )
 {
-    HAL_NVIC_DisableIRQ( ( id == 0 ) ? LPTIM1_IRQn : LPTIM2_IRQn );
+    HAL_NVIC_DisableIRQ( LPTIM1_IRQn );
 }
 
 void LPTIM1_IRQHandler( void )
@@ -129,9 +121,9 @@ void LPTIM1_IRQHandler( void )
     HAL_LPTIM_IRQHandler( &lptim1 );
     HAL_LPTIM_TimeOut_Stop( &lptim1 );
 
-    if( lptim_tmr_irq[HAL_LP_TIMER_ID_1].callback != NULL )
+    if( lptim_tmr_irq.callback != NULL )
     {
-        lptim_tmr_irq[HAL_LP_TIMER_ID_1].callback( lptim_tmr_irq[HAL_LP_TIMER_ID_1].context );
+        lptim_tmr_irq.callback( lptim_tmr_irq.context );
     }
 }
 

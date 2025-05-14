@@ -61,15 +61,6 @@ extern "C" {
  */
 
 /*!
- * \brief Low power timer ID
- */
-typedef enum hal_lp_timer_id_e
-{
-    HAL_LP_TIMER_ID_1 = 0,
-    HAL_LP_TIMER_ID_2 = 1,
-} hal_lp_timer_id_t;
-
-/*!
  * Timer IRQ handling data context
  */
 typedef struct hal_lp_timer_irq_s
@@ -86,32 +77,26 @@ typedef struct hal_lp_timer_irq_s
 /*!
  * \brief Start the provided timer objet for the given time
  *
- * \param [in] id           Low power timer id
  * \param [in] milliseconds Number of milliseconds
  * \param [in] tmr_irq      Timer IRQ handling data ontext
  */
-void hal_lp_timer_start( hal_lp_timer_id_t id, const uint32_t milliseconds, const hal_lp_timer_irq_t* tmr_irq );
+void hal_lp_timer_start( const uint32_t milliseconds, const
+hal_lp_timer_irq_t* tmr_irq );
 
 /*!
  * \brief Start the provided timer objet for the given time
- *
- * \param [in] id Low power timer id
  */
-void hal_lp_timer_stop( hal_lp_timer_id_t id );
+void hal_lp_timer_stop( );
 
 /*!
  * \brief Enable timer interrupts (HW timer only)
- *
- * \param [in] id Low power timer id
  */
-void hal_lp_timer_irq_enable( hal_lp_timer_id_t id );
+void hal_lp_timer_irq_enable( );
 
 /*!
  * \brief Disable timer interrupts (HW timer only)
- *
- * \param [in] id Low power timer id
  */
-void hal_lp_timer_irq_disable( hal_lp_timer_id_t id );
+void hal_lp_timer_irq_disable( );
 
 #ifdef __cplusplus
 }

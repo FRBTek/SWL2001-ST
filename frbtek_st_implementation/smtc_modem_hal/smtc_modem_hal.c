@@ -173,13 +173,13 @@ void smtc_modem_hal_set_offset_to_test_wrapping( const uint32_t offset_to_test_w
 
 void smtc_modem_hal_start_timer( const uint32_t milliseconds, void ( *callback )( void* context ), void* context )
 {
-    hal_lp_timer_start( HAL_LP_TIMER_ID_1, milliseconds,
+    hal_lp_timer_start(  milliseconds,
                         &( hal_lp_timer_irq_t ) { .context = context, .callback = callback } );
 }
 
 void smtc_modem_hal_stop_timer( void )
 {
-    hal_lp_timer_stop( HAL_LP_TIMER_ID_1 );
+    hal_lp_timer_stop(  );
 }
 
 /* ------------ IRQ management ------------*/
@@ -187,19 +187,13 @@ void smtc_modem_hal_stop_timer( void )
 void smtc_modem_hal_disable_modem_irq( void )
 {
     hal_gpio_irq_disable( );
-    hal_lp_timer_irq_disable( HAL_LP_TIMER_ID_1 );
-#if ( SX127X )
-    hal_lp_timer_irq_disable( HAL_LP_TIMER_ID_2 );
-#endif
+    hal_lp_timer_irq_disable(  );
 }
 
 void smtc_modem_hal_enable_modem_irq( void )
 {
     hal_gpio_irq_enable( );
-    hal_lp_timer_irq_enable( HAL_LP_TIMER_ID_1 );
-#if ( SX127X )
-    hal_lp_timer_irq_enable( HAL_LP_TIMER_ID_2 );
-#endif
+    hal_lp_timer_irq_enable(  );
 }
 
 /* ------------ Context saving management ------------*/
@@ -462,6 +456,8 @@ void smtc_modem_hal_stop_radio_tcxo( void )
 
 uint32_t smtc_modem_hal_get_radio_tcxo_startup_delay_ms( void )
 {
+    //TODO: ADD TCXO DEFINE AS BUILD OPTION
+
     // Tcxo is present on LR1110 and LR1120 evk boards, LR1121 ref board does not have tcxo but only 32MHz xtal
 #if defined( LR11XX ) && !defined( LR1121 )
     return 5;

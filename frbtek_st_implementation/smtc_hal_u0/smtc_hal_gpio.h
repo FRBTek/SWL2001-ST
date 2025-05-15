@@ -70,27 +70,6 @@ typedef struct gpio_irq_s
     void                 ( *callback )( void* context );
 } hal_gpio_irq_t;
 
-/*!
- * GPIO Pull modes
- */
-typedef enum gpio_pull_mode_e
-{
-    BSP_GPIO_PULL_MODE_NONE = 0,
-    BSP_GPIO_PULL_MODE_UP   = 1,
-    BSP_GPIO_PULL_MODE_DOWN = 2,
-} hal_gpio_pull_mode_t;
-
-/*!
- * GPIO IRQ modes
- */
-typedef enum gpio_irq_mode_e
-{
-    BSP_GPIO_IRQ_MODE_OFF            = 0,
-    BSP_GPIO_IRQ_MODE_RISING         = 1,
-    BSP_GPIO_IRQ_MODE_FALLING        = 2,
-    BSP_GPIO_IRQ_MODE_RISING_FALLING = 3,
-} hal_gpio_irq_mode_t;
-
 /*
  * -----------------------------------------------------------------------------
  * --- PUBLIC FUNCTIONS PROTOTYPES ---------------------------------------------
@@ -143,13 +122,6 @@ uint32_t hal_gpio_get_value( const hal_gpio_pin_names_t pin );
  * \param [in] pin   pin for which pending state is to be cleared
  */
 void hal_gpio_clear_pending_irq( const hal_gpio_pin_names_t pin );
-
-/**
- * @brief Enable gpio clock according to gpio pin
- *
- * @param [in] pin gpio pin
- */
-void hal_gpio_enable_clock( const hal_gpio_pin_names_t pin );
 
 #ifdef __cplusplus
 }

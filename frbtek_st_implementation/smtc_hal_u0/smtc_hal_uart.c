@@ -68,7 +68,7 @@
  */
 
 //TODO: check for extern handle
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef DEBUG_UART_HANDLE;
 
 /*
  * -----------------------------------------------------------------------------
@@ -82,7 +82,7 @@ extern UART_HandleTypeDef huart2;
 
 void trace_uart_tx( uint8_t* buff, uint8_t len )
 {
-    HAL_UART_Transmit( &huart2, ( uint8_t* ) buff, len, 0xffffff );
+    HAL_UART_Transmit( &DEBUG_UART_HANDLE, ( uint8_t* ) buff, len, 0xffffff );
 }
 
 /*

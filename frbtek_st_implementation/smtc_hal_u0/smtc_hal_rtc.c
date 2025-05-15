@@ -110,7 +110,7 @@
  */
 
 //TODO: check for extern
-static RTC_HandleTypeDef hal_rtc_handle;
+static RTC_HandleTypeDef RTC_HANDLE;
 static uint32_t          offset_to_test_wrapping = 0;
 /*
  * -----------------------------------------------------------------------------
@@ -217,8 +217,8 @@ static uint64_t rtc_get_timestamp_in_ticks( void )
     do
     {
         ssr = RTC->SSR;
-        HAL_RTC_GetDate( &hal_rtc_handle, &date, RTC_FORMAT_BIN );
-        HAL_RTC_GetTime( &hal_rtc_handle, &time, RTC_FORMAT_BIN );
+        HAL_RTC_GetDate( &RTC_HANDLE, &date, RTC_FORMAT_BIN );
+        HAL_RTC_GetTime( &RTC_HANDLE, &time, RTC_FORMAT_BIN );
     } while( ssr != RTC->SSR );
 
     // Calculate amount of elapsed days since 01/01/2000

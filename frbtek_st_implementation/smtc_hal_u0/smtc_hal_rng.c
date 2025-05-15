@@ -65,8 +65,7 @@
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
 
-//TODO: check for extern handle?
-static RNG_HandleTypeDef rng_handle;
+extern RNG_HandleTypeDef RNG_HANDLE;
 
 /*
  * -----------------------------------------------------------------------------
@@ -84,19 +83,11 @@ uint32_t hal_rng_get_random( void )
     // Init and enable RNG
     rng_handle.Instance = RNG;
 
-    if( HAL_RNG_Init( &rng_handle ) != HAL_OK )
-    {
-        mcu_panic( );
-    }
-
     // Wait for data ready interrupt: 42+4 RNG clock cycles
-    if( HAL_RNG_GenerateRandomNumber( &rng_handle, &rand_nb ) != HAL_OK )
+    if( HAL_RNG_GenerateRandomNumber( &RNG_HANDLE, &rand_nb ) != HAL_OK )
     {
         mcu_panic( );
     }
-
-    // Disable RNG
-    HAL_RNG_DeInit( &rng_handle );
 
     return rand_nb;
 }

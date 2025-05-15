@@ -66,7 +66,7 @@
  */
 
 //TODO: Check extern definition
-extern LPTIM_HandleTypeDef lptim1;
+extern LPTIM_HandleTypeDef TIMER_HANDLE;
 
 static hal_lp_timer_irq_t lptim_tmr_irq = {
         .context  = NULL,
@@ -98,29 +98,37 @@ void hal_lp_timer_start( const uint32_t milliseconds, const hal_lp_timer_irq_t* 
     }
 
     // TODO: CHECK INITIAL RELOAD VALUE
-    HAL_LPTIM_TimeOut_Start_IT( &lptim1, delay_ms_2_tick );
+    HAL_LPTIM_TimeOut_Start_IT( &TIMER_HANDLE, delay_ms_2_tick );
     lptim_tmr_irq = *tmr_irq;
 }
 
 void hal_lp_timer_stop( hal_lp_timer_id_t id )
 {
-    HAL_LPTIM_TimeOut_Stop_IT( &lptim1 );
+    HAL_LPTIM_TimeOut_Stop_IT( &TIMER_HANDLE );
 }
 
 void hal_lp_timer_irq_enable( hal_lp_timer_id_t id )
 {
+#if (TIMER_HANDLE == hlptim1)
     HAL_NVIC_EnableIRQ(LPTIM1_IRQn);
+#elif (TIMER_HANDLE == hlptim2)
+    HAL_NVIC_EnableIRQ(LPTIM2_IRQn);
+#endif
 }
 
 void hal_lp_timer_irq_disable( hal_lp_timer_id_t id )
 {
+#if (TIMER_HANDLE == hlptim1)
     HAL_NVIC_DisableIRQ( LPTIM1_IRQn );
+#elif (TIMER_HANDLE == hlptim2)
+    HAL_NVIC_EnableIRQ(LPTIM2_IRQn);
+#endif
 }
 
 void LPTIM1_IRQHandler( void )
 {
-    HAL_LPTIM_IRQHandler( &lptim1 );
-    HAL_LPTIM_TimeOut_Stop( &lptim1 );
+    HAL_LPTIM_IRQHandler( &TIMER_HANDLE );
+    HAL_LPTIM_TimeOut_Stop( &TIMER_HANDLE );
 
     if( lptim_tmr_irq.callback != NULL )
     {

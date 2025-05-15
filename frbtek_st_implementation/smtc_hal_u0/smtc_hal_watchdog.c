@@ -42,6 +42,7 @@
 
 #include "smtc_hal_watchdog.h"
 #include "stm32u0xx_hal.h"
+#include "mcu_conf.h"
 
 /*
  * -----------------------------------------------------------------------------
@@ -62,8 +63,8 @@
  * -----------------------------------------------------------------------------
  * --- PRIVATE VARIABLES -------------------------------------------------------
  */
-//TODO: add iwdg handle
-static IWDG_HandleTypeDef iwdg_handle;
+
+extern IWDG_HandleTypeDef IWDG_HANDLE;
 
 /*
  * -----------------------------------------------------------------------------
@@ -77,7 +78,7 @@ static IWDG_HandleTypeDef iwdg_handle;
 
 void hal_watchdog_reload( void )
 {
-    HAL_IWDG_Refresh( &iwdg_handle );
+    HAL_IWDG_Refresh( &IWDG_HANDLE );
 }
 
 /*

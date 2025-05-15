@@ -60,6 +60,17 @@ extern "C" {
 /********************************************************************************/
 /* clang-format off */
 
+//Peripheral handles
+#define DEBUG_UART_HANDLE       huart2
+#define RADIO_SPI_HANDLE        hspi1
+#define TIMER_HANDLE            hlptim1
+#define RTC_HANDLE              hrtc
+#define RNG_HANDLE              hrng
+
+#if(WATCHDOG == YES)
+#define IWDG_HANDLE             iwdg
+#endif
+
 //Debug uart specific pinout for debug print
 #define DEBUG_UART_TX           PA_2
 #define DEBUG_UART_RX           PA_3
@@ -69,47 +80,12 @@ extern "C" {
 #define RADIO_SPI_MOSI          PA_7
 #define RADIO_SPI_MISO          PA_6
 #define RADIO_SPI_SCLK          PA_5
-#if defined( SX1272 ) || defined( SX1276 )
-#define RADIO_NSS               PB_6
-#define RADIO_DIO_0             PA_10
-#define RADIO_DIO_1             PB_3
-#define RADIO_DIO_2             PB_5
-#define RADIO_ANTENNA_SWITCH    PC_1
-#else
 #define RADIO_NSS               PA_8
 #define RADIO_DIOX              PB_4
 #define RADIO_BUSY_PIN          PB_3
-#endif
 
-#define RADIO_SPI_ID            1
-
-#if defined (SX126X)
 #define SX126X_RADIO_RF_SWITCH_CTRL    PA_9
-#endif
 
-#if defined (SX128X)
-// For sx128x eval board with 2 antennas
-#define RADIO_ANTENNA_SWITCH    PB_0
-#endif
-
-#if defined( LR11XX_TRANSCEIVER )
-// LR11XX_TRANSCEIVER - Use for GNSS LNA control
-#define RADIO_LNA_CTRL          PB_0
-/* LED */
-#define SMTC_LED_RX             PC_0
-#define SMTC_LED_TX             PC_1
-#define SMTC_LED_SCAN           PB_5
-#endif
-
-
-#define EXTI_BUTTON             PC_13
-
-//Hw modem specific pinout
-#define HW_MODEM_COMMAND_PIN    PC_6
-#define HW_MODEM_EVENT_PIN      PC_5
-#define HW_MODEM_BUSY_PIN       PC_8
-#define HW_MODEM_TX_LINE        PC_10
-#define HW_MODEM_RX_LINE        PC_11
 /* clang-format on */
 
 /*

@@ -64,7 +64,7 @@
  */
 
 //TODO: check for extern handle
-extern SPI_HandleTypeDef spi1;
+extern SPI_HandleTypeDef RADIO_SPI_HANDLE;
 
 /*
  * -----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ uint16_t hal_spi_in_out( const uint16_t out_data )
         mcu_panic();
     };
 
-    HAL_SPI_TransmitReceive(&spi1,out_data,&rxData,1,2000);
+    HAL_SPI_TransmitReceive(&RADIO_SPI_HANDLE,out_data,&rxData,1,2000);
 
     return rxData;
 }

@@ -115,11 +115,6 @@ void hal_mcu_disable_irq( void );
 void hal_mcu_enable_irq( void );
 
 /*!
- * Initializes BSP used MCU
- */
-void hal_mcu_init( void );
-
-/*!
  * Reset mcu
  */
 void hal_mcu_reset( void );
@@ -128,23 +123,6 @@ void hal_mcu_reset( void );
  * Blocking wait
  */
 void hal_mcu_wait_us( const int32_t microseconds );
-
-/*!
- * Sets the MCU in sleep mode for the given number of milliseconds.
- *
- * \param[IN] milliseconds Number of milliseconds to stay in sleep mode
- */
-void hal_mcu_set_sleep_for_ms( const int32_t milliseconds );
-
-/*!
- * Suspend low power process and avoid looping on it
- */
-void hal_mcu_disable_low_power_wait( void );
-
-/*!
- * Enable low power process
- */
-void hal_mcu_enable_low_power_wait( void );
 
 #ifdef __cplusplus
 }

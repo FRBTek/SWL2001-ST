@@ -66,32 +66,13 @@ extern "C" {
  */
 
 /*!
- *  Initializes the MCU SPI peripheral
- *
- * \param [IN] id   SPI interface id [1:N]
- * \param [IN] mosi SPI MOSI pin name to be used
- * \param [IN] miso SPI MISO pin name to be used
- * \param [IN] sclk SPI SCLK pin name to be used
- */
-void hal_spi_init( const uint32_t id, const hal_gpio_pin_names_t mosi, const hal_gpio_pin_names_t miso,
-                   const hal_gpio_pin_names_t sclk );
-
-/*!
- *  Deinitialize the MCU SPI peripheral
- *
- * \param [IN] id   SPI interface id [1:N]
- */
-void hal_spi_de_init( const uint32_t id );
-
-/*!
  * Sends out_data and receives in_data
  *
- * \param [IN] id       SPI interface id [1:N]
  * \param [IN] out_data Byte to be sent
 
  * \retval in_data      Received byte.
  */
-uint16_t hal_spi_in_out( const uint32_t id, const uint16_t out_data );
+uint16_t hal_spi_in_out( const uint16_t out_data );
 
 #ifdef __cplusplus
 }

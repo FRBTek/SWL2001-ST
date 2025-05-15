@@ -41,7 +41,7 @@
 #include <stdbool.h>  // bool type
 
 #include "smtc_hal_mcu.h"
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 
 #include "stm32l0xx_ll_utils.h"
 #include "stm32l0xx_ll_cortex.h"

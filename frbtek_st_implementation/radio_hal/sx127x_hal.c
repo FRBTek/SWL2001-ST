@@ -47,7 +47,7 @@
 #include "smtc_hal_spi.h"
 #include "smtc_hal_mcu.h"
 #include "smtc_hal_lp_timer.h"
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 
 /*
  * -----------------------------------------------------------------------------

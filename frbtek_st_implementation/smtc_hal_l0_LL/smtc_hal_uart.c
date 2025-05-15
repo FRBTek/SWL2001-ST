@@ -47,7 +47,7 @@
 #include "stm32l0xx_ll_usart.h"
 #include "stm32l0xx_ll_dma.h"
 
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 #include "smtc_hal_mcu.h"
 
 /*

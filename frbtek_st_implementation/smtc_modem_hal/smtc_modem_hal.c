@@ -59,7 +59,7 @@
 #include "smtc_hal_flash.h"
 #endif
 
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 #include "status_if.h"
 
 // for variadic args

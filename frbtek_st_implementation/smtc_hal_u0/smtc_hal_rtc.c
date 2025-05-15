@@ -43,6 +43,7 @@
 #include "stm32u0xx_hal.h"
 #include "stm32u0xx_ll_rtc.h"
 #include "smtc_hal_mcu.h"
+#include "mcu_conf.h"
 
 /*
  * -----------------------------------------------------------------------------

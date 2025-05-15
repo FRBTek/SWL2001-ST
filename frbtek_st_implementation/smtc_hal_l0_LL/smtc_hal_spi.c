@@ -45,7 +45,7 @@
 #include "stm32l0xx_ll_gpio.h"
 #include "stm32l0xx_ll_bus.h"
 
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 
 /*
  * -----------------------------------------------------------------------------

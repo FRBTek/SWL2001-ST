@@ -43,6 +43,7 @@
 #include "smtc_hal_lp_timer.h"
 #include "stm32u0xx_hal.h"
 #include "smtc_hal_mcu.h"
+#include "mcu_conf.h"
 
 /*
  * -----------------------------------------------------------------------------

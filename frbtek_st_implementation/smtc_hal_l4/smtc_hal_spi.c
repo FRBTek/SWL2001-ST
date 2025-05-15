@@ -45,7 +45,7 @@
 #include "stm32l4xx_ll_spi.h"
 #include "smtc_hal_gpio.h"
 
-#include "modem_pinout.h"
+#include "mcu_conf.h"
 #include "smtc_hal_mcu.h"
 
 /*

@@ -102,27 +102,19 @@ void hal_lp_timer_start( const uint32_t milliseconds, const hal_lp_timer_irq_t* 
     lptim_tmr_irq = *tmr_irq;
 }
 
-void hal_lp_timer_stop( hal_lp_timer_id_t id )
+void hal_lp_timer_stop( )
 {
     HAL_LPTIM_TimeOut_Stop_IT( &TIMER_HANDLE );
 }
 
-void hal_lp_timer_irq_enable( hal_lp_timer_id_t id )
+void hal_lp_timer_irq_enable( )
 {
-#if (TIMER_HANDLE == hlptim1)
-    HAL_NVIC_EnableIRQ(LPTIM1_IRQn);
-#elif (TIMER_HANDLE == hlptim2)
-    HAL_NVIC_EnableIRQ(LPTIM2_IRQn);
-#endif
+    HAL_NVIC_EnableIRQ( TIM6_DAC_LPTIM1_IRQn );
 }
 
-void hal_lp_timer_irq_disable( hal_lp_timer_id_t id )
+void hal_lp_timer_irq_disable( )
 {
-#if (TIMER_HANDLE == hlptim1)
-    HAL_NVIC_DisableIRQ( LPTIM1_IRQn );
-#elif (TIMER_HANDLE == hlptim2)
-    HAL_NVIC_EnableIRQ(LPTIM2_IRQn);
-#endif
+    HAL_NVIC_DisableIRQ( TIM6_DAC_LPTIM1_IRQn );
 }
 
 void LPTIM1_IRQHandler( void )

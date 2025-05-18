@@ -40,6 +40,7 @@
 #include <stdint.h>   // C99 types
 #include <stdbool.h>  // bool type
 
+#include "stm32u0xx_hal.h"
 #include "smtc_hal_mcu.h"
 
 /*

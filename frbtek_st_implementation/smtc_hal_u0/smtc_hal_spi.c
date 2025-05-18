@@ -81,16 +81,16 @@ extern SPI_HandleTypeDef RADIO_SPI_HANDLE;
  * --- PUBLIC FUNCTIONS DEFINITION ---------------------------------------------
  */
 
-uint16_t hal_spi_in_out( const uint16_t out_data )
+uint16_t hal_spi_in_out( const uint8_t out_data )
 {
     uint8_t rxData = 0;
 
-    if( HAL_SPI_GetState(&spi1) != 1 )
+    if( HAL_SPI_GetState(&RADIO_SPI_HANDLE) != 1 )
     {
         mcu_panic();
     };
 
-    HAL_SPI_TransmitReceive(&RADIO_SPI_HANDLE,out_data,&rxData,1,2000);
+    HAL_SPI_TransmitReceive(&RADIO_SPI_HANDLE,&out_data,&rxData,1,2000);
 
     return rxData;
 }

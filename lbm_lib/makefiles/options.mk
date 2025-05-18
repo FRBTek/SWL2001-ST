@@ -58,7 +58,7 @@ MODEM_DEEP_TRACE ?= no
 
 # LoRaWAN regions: ALL to build all available regions, otherwise regions can be added with a comma separator (ex EU_868,US_915)
 # If radio target is sx128x WW_2G4 is forced 
-REGION ?= ALL
+REGION ?= EU_868
 
 # Crypto management only for lr11xx targets (SOFT, LR11XX, LR11XX_WITH_CREDENTIALS )
 CRYPTO ?= SOFT

@@ -11,19 +11,14 @@ APPBUILD_ROOT = build
 # Prefix for all binaries names
 APPTARGET_ROOT = app
 
-# Target board (NUCLEO_L476 or NUCLEO_L073)
-BOARD ?= NUCLEO_L476
+# Target board
+BOARD ?= NUCLEO_U073
 
 # Target radio
 TARGET_RADIO ?= nc
 
-# Application (PERIODICAL_UPLINK, HW_MODEM, PORTING_TESTS or LCTT_CERTIF)
-# Default: PERIODICAL_UPLINK
-MODEM_APP ?= nc
-
-# Application region for periodical uplink and lctt certif example (values can be found in smtc_modem_api.h)
-# Default in code: SMTC_MODEM_REGION_EU_868 (SMTC_MODEM_REGION_WW2G4 for sx128x)
-MODEM_APP_REGION ?= nc
+# Region
+REGION ?= EU_868
 
 # Allow fuota (take more RAM, due to read_modify_write feature) and force lbm build with fuota
 ALLOW_FUOTA ?= no
@@ -35,9 +30,6 @@ ALLOW_STORE_AND_FORWARD ?= no
 #TRACE
 LBM_TRACE ?= yes
 APP_TRACE ?= yes
-
-# LR11xx option to use crc
-USE_LR11XX_CRC_SPI ?= no
 
 # Allow relay 
 ALLOW_RELAY_RX ?= no

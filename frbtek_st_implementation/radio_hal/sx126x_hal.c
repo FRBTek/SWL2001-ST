@@ -137,11 +137,11 @@ sx126x_hal_status_t sx126x_hal_read( const void* context, const uint8_t* command
     hal_gpio_set_value( RADIO_NSS, 0 );
     for( uint16_t i = 0; i < command_length; i++ )
     {
-        hal_spi_in_out( RADIO_SPI_ID, command[i] );
+        hal_spi_in_out(  command[i] );
     }
     for( uint16_t i = 0; i < data_length; i++ )
     {
-        data[i] = hal_spi_in_out( RADIO_SPI_ID, 0 );
+        data[i] = hal_spi_in_out(  0 );
     }
     // Put NSS high as the spi transaction is finished
     hal_gpio_set_value( RADIO_NSS, 1 );

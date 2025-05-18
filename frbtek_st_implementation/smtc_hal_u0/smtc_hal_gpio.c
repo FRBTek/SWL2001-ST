@@ -100,24 +100,16 @@ void hal_gpio_irq_deatach( const hal_gpio_irq_t* irq )
 
 void hal_gpio_irq_enable( void )
 {
-    HAL_NVIC_EnableIRQ( EXTI0_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI1_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI2_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI3_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI4_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI9_5_IRQn );
-    HAL_NVIC_EnableIRQ( EXTI15_10_IRQn );
+    HAL_NVIC_EnableIRQ( EXTI0_1_IRQn );
+    HAL_NVIC_EnableIRQ( EXTI2_3_IRQn );
+    HAL_NVIC_EnableIRQ( EXTI4_15_IRQn );
 }
 
 void hal_gpio_irq_disable( void )
 {
-    HAL_NVIC_DisableIRQ( EXTI0_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI1_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI2_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI3_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI4_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI9_5_IRQn );
-    HAL_NVIC_DisableIRQ( EXTI15_10_IRQn );
+    HAL_NVIC_DisableIRQ( EXTI0_1_IRQn );
+    HAL_NVIC_DisableIRQ( EXTI2_3_IRQn );
+    HAL_NVIC_DisableIRQ( EXTI4_15_IRQn );
 }
 
 //
@@ -126,14 +118,16 @@ void hal_gpio_irq_disable( void )
 
 void hal_gpio_set_value( const hal_gpio_pin_names_t pin, const uint32_t value )
 {
-    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( AHB2PERIPH_BASE + ( ( pin & 0xF0 ) << 6 ) );
+    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORTBASE + ( ( pin & 0xF0 )
+            << 6 ) );
 
     HAL_GPIO_WritePin( gpio_port, ( 1 << ( pin & 0x0F ) ), ( value != 0 ) ? GPIO_PIN_SET : GPIO_PIN_RESET );
 }
 
 uint32_t hal_gpio_get_value( const hal_gpio_pin_names_t pin )
 {
-    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( AHB2PERIPH_BASE + ( ( pin & 0xF0 ) << 6 ) );
+    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORTBASE + ( ( pin & 0xF0 )
+            << 6 ) );
 
     return ( HAL_GPIO_ReadPin( gpio_port, ( ( 1 << ( pin & 0x0F ) ) ) ) != GPIO_PIN_RESET ) ? 1 : 0;
 }
@@ -143,30 +137,16 @@ void hal_gpio_clear_pending_irq( const hal_gpio_pin_names_t pin )
     switch( pin & 0x0F )
     {
     case 0:
-        NVIC_ClearPendingIRQ( EXTI0_IRQn );
-        break;
     case 1:
-        NVIC_ClearPendingIRQ( EXTI1_IRQn );
+        NVIC_ClearPendingIRQ( EXTI0_1_IRQn );
 
         break;
     case 2:
-        NVIC_ClearPendingIRQ( EXTI2_IRQn );
-        break;
     case 3:
-        NVIC_ClearPendingIRQ( EXTI3_IRQn );
-        break;
-    case 4:
-        NVIC_ClearPendingIRQ( EXTI4_IRQn );
-        break;
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-        NVIC_ClearPendingIRQ( EXTI9_5_IRQn );
+        NVIC_ClearPendingIRQ( EXTI2_3_IRQn );
         break;
     default:
-        NVIC_ClearPendingIRQ( EXTI15_10_IRQn );
+        NVIC_ClearPendingIRQ( EXTI4_15_IRQn );
         break;
     }
 }

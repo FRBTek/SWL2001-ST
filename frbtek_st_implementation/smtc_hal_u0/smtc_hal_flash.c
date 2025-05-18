@@ -92,13 +92,6 @@
  */
 static uint32_t flash_get_page( uint32_t Address );
 
-/**
- * @brief  Gets the bank of a given address
- * @param  Addr: Address of the FLASH Memory
- * @retval The bank of a given address
- */
-static uint32_t flash_get_bank( uint32_t Address );
-
 /*
  * -----------------------------------------------------------------------------
  * --- PUBLIC FUNCTIONS DEFINITION ---------------------------------------------
@@ -128,14 +121,11 @@ uint8_t hal_flash_erase_page( uint32_t addr, uint8_t nb_page )
     /* Get the 1st page to erase */
     FirstUserPage = flash_get_page( addr );
 
-    /* Get the bank */
-    bank_number = flash_get_bank( addr );
-
     /* Fill EraseInit structure*/
     EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
     EraseInitStruct.Page      = FirstUserPage;
     EraseInitStruct.NbPages   = nb_page;
-    EraseInitStruct.Banks     = bank_number;
+    EraseInitStruct.Banks     = 0;
 
     // SMTC_HAL_TRACE_INFO( "Erase page %u bank %u\r\n", FirstUserPage, bank_number );
 
@@ -313,21 +303,6 @@ void hal_flash_read_modify_write( uint32_t addr, const uint8_t* buffer, uint32_t
 static uint32_t flash_get_page( uint32_t Addr )
 {
     return ( Addr - FLASH_BASE ) / FLASH_PAGE_SIZE;
-}
-
-/**
- * @brief  Gets the bank of a given address
- * @param  Addr: Address of the FLASH Memory
- * @retval The bank of a given address
- */
-static uint32_t flash_get_bank( uint32_t Addr )
-{
-    uint32_t page = flash_get_page( Addr );
-    if( page >= FLASH_PAGE_NUMBER )
-    {
-        SMTC_HAL_TRACE_ERROR( "Address out of range: 0x%X\r\n", Addr );
-    }
-    return FLASH_BANK_1 + ( page / FLASH_PAGE_PER_BANK );
 }
 
 /* --- EOF ------------------------------------------------------------------ */

@@ -43,6 +43,7 @@
 #include "stm32u0xx_hal.h"
 #include "smtc_hal_rng.h"
 
+#include "mcu_conf.h"
 #include "smtc_hal_mcu.h"
 
 /*
@@ -80,8 +81,6 @@ extern RNG_HandleTypeDef RNG_HANDLE;
 uint32_t hal_rng_get_random( void )
 {
     uint32_t rand_nb = 0;
-    // Init and enable RNG
-    rng_handle.Instance = RNG;
 
     // Wait for data ready interrupt: 42+4 RNG clock cycles
     if( HAL_RNG_GenerateRandomNumber( &RNG_HANDLE, &rand_nb ) != HAL_OK )

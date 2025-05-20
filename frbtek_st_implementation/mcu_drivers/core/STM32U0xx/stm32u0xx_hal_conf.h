@@ -192,19 +192,19 @@
   */
 
 #ifdef HAL_RCC_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_rcc.h"
+#include "stm32u0xx_hal_rcc.h"
 #endif /* HAL_RCC_MODULE_ENABLED */
 
 #ifdef HAL_GPIO_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_gpio.h"
+#include "stm32u0xx_hal_gpio.h"
 #endif /* HAL_GPIO_MODULE_ENABLED */
 
 #ifdef HAL_DMA_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_dma.h"
+#include "stm32u0xx_hal_dma.h"
 #endif /* HAL_DMA_MODULE_ENABLED */
 
 #ifdef HAL_CORTEX_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_cortex.h"
+#include "stm32u0xx_hal_cortex.h"
 #endif /* HAL_CORTEX_MODULE_ENABLED */
 
 #ifdef HAL_ADC_MODULE_ENABLED
@@ -233,11 +233,11 @@
 #endif /* HAL_DAC_MODULE_ENABLED */
 
 #ifdef HAL_EXTI_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_exti.h"
+#include "stm32u0xx_hal_exti.h"
 #endif /* HAL_EXTI_MODULE_ENABLED */
 
 #ifdef HAL_FLASH_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_flash.h"
+#include "stm32u0xx_hal_flash.h"
 #endif /* HAL_FLASH_MODULE_ENABLED */
 
 #ifdef HAL_I2C_MODULE_ENABLED
@@ -245,11 +245,11 @@
 #endif /* HAL_I2C_MODULE_ENABLED */
 
 #ifdef HAL_IWDG_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_iwdg.h"
+#include "stm32u0xx_hal_iwdg.h"
 #endif /* HAL_IWDG_MODULE_ENABLED */
 
 #ifdef HAL_LPTIM_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_lptim.h"
+#include "stm32u0xx_hal_lptim.h"
 #endif /* HAL_LPTIM_MODULE_ENABLED */
 
 #ifdef HAL_LCD_MODULE_ENABLED
@@ -261,19 +261,19 @@
 #endif /* HAL_OPAMP_MODULE_ENABLED */
 
 #ifdef HAL_PWR_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_pwr.h"
+#include "stm32u0xx_hal_pwr.h"
 #endif /* HAL_PWR_MODULE_ENABLED */
 
 #ifdef HAL_RNG_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_rng.h"
+#include "stm32u0xx_hal_rng.h"
 #endif /* HAL_RNG_MODULE_ENABLED */
 
 #ifdef HAL_RTC_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_rtc.h"
+#include "stm32u0xx_hal_rtc.h"
 #endif /* HAL_RTC_MODULE_ENABLED */
 
 #ifdef HAL_SPI_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_spi.h"
+#include "stm32u0xx_hal_spi.h"
 #endif /* HAL_SPI_MODULE_ENABLED */
 
 #ifdef HAL_TIM_MODULE_ENABLED
@@ -286,7 +286,7 @@
 #endif /* HAL_TSC_MODULE_ENABLED */
 
 #ifdef HAL_UART_MODULE_ENABLED
-#include "../../STM32U0xx_HAL_Driver/stm32u0xx_hal_uart.h"
+#include "stm32u0xx_hal_uart.h"
 #endif /* HAL_UART_MODULE_ENABLED */
 
 #ifdef HAL_USART_MODULE_ENABLED

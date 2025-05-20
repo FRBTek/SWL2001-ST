@@ -72,7 +72,7 @@ extern "C" {
 
  * \retval in_data      Received byte.
  */
-uint16_t hal_spi_in_out( const uint8_t out_data );
+uint16_t hal_spi_in_out( uint8_t out_data );
 
 #ifdef __cplusplus
 }

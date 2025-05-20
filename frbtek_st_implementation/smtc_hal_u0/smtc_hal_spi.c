@@ -81,7 +81,7 @@ extern SPI_HandleTypeDef RADIO_SPI_HANDLE;
  * --- PUBLIC FUNCTIONS DEFINITION ---------------------------------------------
  */
 
-uint16_t hal_spi_in_out( const uint8_t out_data )
+uint16_t hal_spi_in_out( uint8_t out_data )
 {
     uint8_t rxData = 0;
 

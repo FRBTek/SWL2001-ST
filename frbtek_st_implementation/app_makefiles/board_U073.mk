@@ -7,7 +7,10 @@
 #-----------------------------------------------------------------------------
 
 #MCU compilation flags
-MCU_FLAGS ?= -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft
+MCU_FLAGS = \
+	-mcpu=cortex-m0plus \
+	-mthumb \
+	-mfloat-abi=soft
 
 BOARD_C_DEFS =  \
 	-DUSE_HAL_DRIVER \

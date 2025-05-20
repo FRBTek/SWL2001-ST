@@ -106,7 +106,6 @@ uint8_t hal_flash_erase_page( uint32_t addr, uint8_t nb_page )
     uint8_t  status                = SUCCESS;
     uint8_t  hal_status            = SUCCESS;
     uint32_t FirstUserPage         = 0;
-    uint32_t bank_number           = 0;
     uint32_t PageError             = 0;
     uint8_t  flash_operation_retry = 0;
 

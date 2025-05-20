@@ -20,26 +20,12 @@ help:
 	$(call echo_help, " * make <TARGET>                   : build basic_modem hal and lib on a given target")
 	$(call echo_help, "")
 	$(call echo_help_b, "---------------------------- All inclusive ---------------------------------")
-	$(call echo_help, " * make full_<TARGET>              : clean and build basic_modem on a given target")
+	$(call echo_help, " * make full_<TARGET>              : clean and build hal on a given target")
 	$(call echo_help, "")
 	$(call echo_help_b, "---------------------- Optional build parameters ---------------------------")
 	$(call echo_help, " * BOARD=xxx                       : choose which mcu board will be used:(default is NUCLEO_U073)")
 	$(call echo_help, " *                                  - NUCLEO_U073")
-	$(call echo_help, " * REGION=xxx                      : choose which region should be compiled (default: EU_868)")
-	$(call echo_help, " *                                  - AS_923")
-	$(call echo_help, " *                                  - AU_915")
-	$(call echo_help, " *                                  - CN_470")
-	$(call echo_help, " *                                  - CN_470_RP_1_0")
-	$(call echo_help, " *                                  - EU_868")
-	$(call echo_help, " *                                  - IN_865")
-	$(call echo_help, " *                                  - KR_920")
-	$(call echo_help, " *                                  - RU_864")
-	$(call echo_help, " *                                  - US_915")
-	$(call echo_help, " *                                  - WW_2G4 (to be used only for lr1120 and sx128x targets)")
-	$(call echo_help, " * LBM_TRACE=yes/no                : choose to enable or disable modem trace print (default: trace is ON)")
 	$(call echo_help, " * APP_TRACE=yes/no                : choose to enable or disable application trace print (default: trace is ON)")
-	$(call echo_help, " * ALLOW_RELAY_TX=yes/no           : choose to enable or disable RelayTx (default: no)")
-	$(call echo_help, " * ALLOW_RELAY_RX=yes/no           : choose to enable or disable RelayRx (default: no)")
 	$(call echo_help_b, "-------------------- Optional makefile parameters --------------------------")
 	$(call echo_help, " * MULTITHREAD=no                  : Disable multithreaded build")
 	$(call echo_help, " * VERBOSE=yes                     : Increase build verbosity")
@@ -72,22 +58,17 @@ endif
 # Clean
 #-----------------------------------------------------------------------------
 clean_all: clean_app
-	$(MAKE) -C $(LORA_BASICS_MODEM) clean_all $(MTHREAD_FLAG)
 
 clean_sx1261:
-	$(MAKE) clean_modem TARGET_RADIO=sx1261
 	$(MAKE) clean_target TARGET_RADIO=sx1261
 
 clean_sx1262:
-	$(MAKE) clean_modem TARGET_RADIO=sx1262
 	$(MAKE) clean_target TARGET_RADIO=sx1262
 
 clean_sx1268:
-	$(MAKE) clean_modem TARGET_RADIO=sx1268
 	$(MAKE) clean_target TARGET_RADIO=sx1268
 
 clean:
-	$(MAKE) clean_modem
 	$(MAKE) clean_target
 
 clean_app:
@@ -111,7 +92,6 @@ sx1261:
 	$(MAKE) app TARGET_RADIO=sx1261 $(MTHREAD_FLAG)
 
 full_sx1261:
-	$(MAKE) clean_modem TARGET_RADIO=sx1261
 	$(MAKE) clean_target TARGET_RADIO=sx1261
 	$(MAKE) app TARGET_RADIO=sx1261 $(MTHREAD_FLAG)
 
@@ -120,7 +100,6 @@ sx1262:
 	$(MAKE) app TARGET_RADIO=sx1262 $(MTHREAD_FLAG)
 
 full_sx1262:
-	$(MAKE) clean_modem TARGET_RADIO=sx1262
 	$(MAKE) clean_target TARGET_RADIO=sx1262
 	$(MAKE) app TARGET_RADIO=sx1262 $(MTHREAD_FLAG)
 
@@ -129,6 +108,5 @@ sx1268:
 	$(MAKE) app TARGET_RADIO=sx1268 $(MTHREAD_FLAG)
 
 full_sx1268:
-	$(MAKE) clean_modem TARGET_RADIO=sx1268
 	$(MAKE) clean_target TARGET_RADIO=sx1268
 	$(MAKE) app TARGET_RADIO=sx1268 $(MTHREAD_FLAG)

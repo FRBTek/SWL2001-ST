@@ -118,7 +118,7 @@ void hal_gpio_irq_disable( void )
 
 void hal_gpio_set_value( const hal_gpio_pin_names_t pin, const uint32_t value )
 {
-    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORTBASE + ( ( pin & 0xF0 )
+    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORT_BASE + ( ( pin & 0xF0 )
             << 6 ) );
 
     HAL_GPIO_WritePin( gpio_port, ( 1 << ( pin & 0x0F ) ), ( value != 0 ) ? GPIO_PIN_SET : GPIO_PIN_RESET );
@@ -126,7 +126,7 @@ void hal_gpio_set_value( const hal_gpio_pin_names_t pin, const uint32_t value )
 
 uint32_t hal_gpio_get_value( const hal_gpio_pin_names_t pin )
 {
-    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORTBASE + ( ( pin & 0xF0 )
+    GPIO_TypeDef* gpio_port = ( GPIO_TypeDef* ) ( IOPORT_BASE + ( ( pin & 0xF0 )
             << 6 ) );
 
     return ( HAL_GPIO_ReadPin( gpio_port, ( ( 1 << ( pin & 0x0F ) ) ) ) != GPIO_PIN_RESET ) ? 1 : 0;

@@ -9,7 +9,7 @@
 # default action: print help
 #-----------------------------------------------------------------------------
 help:
-	$(call echo_help_b, "Available TARGETs:	sx1261	sx1262	sx1268")
+	$(call echo_help_b, "Available TARGETs:	sx1261	sx1262	sx1268 wio_sx1262")
 	$(call echo_help, "")
 	$(call echo_help_b, "-------------------------------- Clean -------------------------------------")
 	$(call echo_help, " * make clean_<TARGET>             : clean basic_modem hal and lib for a given target")
@@ -49,6 +49,10 @@ ifeq ($(TARGET_RADIO),sx1268)
 -include app_makefiles/app_sx126x.mk
 endif
 
+ifeq ($(TARGET_RADIO),wio_sx1262)
+-include app_makefiles/wio-sx1262.mk
+endif
+
 #-----------------------------------------------------------------------------
 -include app_makefiles/app_common.mk
 
@@ -64,6 +68,9 @@ clean_sx1261:
 
 clean_sx1262:
 	$(MAKE) clean_target TARGET_RADIO=sx1262
+
+clean_wio_sx1262:
+	$(MAKE) clean_target TARGET_RADIO=wio_sx1262
 
 clean_sx1268:
 	$(MAKE) clean_target TARGET_RADIO=sx1268
@@ -110,3 +117,11 @@ sx1268:
 full_sx1268:
 	$(MAKE) clean_target TARGET_RADIO=sx1268
 	$(MAKE) app TARGET_RADIO=sx1268 $(MTHREAD_FLAG)
+
+#-- WIO_SX1262 ---------------------------------------------------------------
+wio_sx1262:
+	$(MAKE) app TARGET_RADIO=wio_sx1262 $(MTHREAD_FLAG)
+
+full_wio_sx1262:
+	$(MAKE) clean_target TARGET_RADIO=wio_sx1262
+	$(MAKE) app TARGET_RADIO=wio_sx1262 $(MTHREAD_FLAG)

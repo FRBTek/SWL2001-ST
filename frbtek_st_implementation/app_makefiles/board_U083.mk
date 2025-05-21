@@ -1,5 +1,5 @@
 ##############################################################################
-# Definitions for the STM32 U073 board
+# Definitions for the STM32 U083 board
 ##############################################################################
 
 #-----------------------------------------------------------------------------
@@ -14,7 +14,7 @@ MCU_FLAGS = \
 
 BOARD_C_DEFS =  \
 	-DUSE_HAL_DRIVER \
-	-DSTM32U073xx
+	-DSTM32U083xx
 
 #-----------------------------------------------------------------------------
 # Hardware-specific sources
@@ -29,12 +29,8 @@ BOARD_C_SOURCES = \
 	smtc_hal_u0/smtc_hal_spi.c\
 	smtc_hal_u0/smtc_hal_lp_timer.c\
 	smtc_hal_u0/smtc_hal_trace.c\
-	smtc_hal_u0/smtc_hal_uart.c
-
-ifeq ($(WATCHDOG),yes)
-BOARD_C_SOURCES += \
+	smtc_hal_u0/smtc_hal_uart.c\
 	smtc_hal_u0/smtc_hal_watchdog.c
-endif
 
 BOARD_C_INCLUDES =  \
 	-Imcu_drivers/core/STM32U0xx\

@@ -31,16 +31,21 @@ BIN = $(CP) -O binary -S
 # Board selection
 #-----------------------------------------------------------------------------
 
-ifeq ($(BOARD),NUCLEO_U073)
+ifeq ($(BOARD),U073)
 -include app_makefiles/board_U073.mk
-BOARD_TARGET=u0
+BOARD_TARGET=U073xx
+endif
+
+ifeq ($(BOARD),U083)
+-include app_makefiles/board_U083.mk
+BOARD_TARGET=U083xx
 endif
 
 #-----------------------------------------------------------------------------
 # Define target build directory
 #-----------------------------------------------------------------------------
-BUILD_TARGET = $(APPTARGET_ROOT)_$(TARGET)
-BUILD_DIR = $(APPBUILD_ROOT)_$(TARGET)_$(BOARD_TARGET)
+BUILD_TARGET = $(APPTARGET_ROOT)_$(TARGET_RADIO)
+BUILD_DIR = $(APPBUILD_ROOT)_$(TARGET_RADIO)_$(BOARD_TARGET)
 
 #-----------------------------------------------------------------------------
 # Multithread is disabled if verbose build, for readable logs
@@ -136,6 +141,11 @@ endif
 ifeq ($(APP_DEBUG),yes)
 COMMON_C_DEFS += \
 	-DHW_DEBUG_PROBE=1
+endif
+
+ifeq ($(WATCHDOG),yes)
+COMMON_C_DEFS += \
+	-DWATCHDOG
 endif
 CFLAGS += -fno-builtin $(MCU_FLAGS) $(BOARD_C_DEFS) $(COMMON_C_DEFS) $(MODEM_C_DEFS) $(OPT) $(WFLAG) -MMD -MP -MF"$(@:%.o=%.d)"
 CFLAGS += -falign-functions=4

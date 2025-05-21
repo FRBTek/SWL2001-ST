@@ -12,13 +12,16 @@ APPBUILD_ROOT = build
 APPTARGET_ROOT = app
 
 # Target board
-BOARD ?= NUCLEO_U073
+BOARD ?= U073
 
 # Target radio
 TARGET_RADIO ?= nc
 
 #TRACE
 APP_TRACE ?= yes
+
+#Watchdog
+WATCHDOG ?= no
 
 #-----------------------------------------------------------------------------
 # Optimization

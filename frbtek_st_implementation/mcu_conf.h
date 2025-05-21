@@ -67,7 +67,7 @@ extern "C" {
 #define RTC_HANDLE              hrtc
 #define RNG_HANDLE              hrng
 
-#if(WATCHDOG == YES)
+#if defined( WATCHDOG )
 #define IWDG_HANDLE             iwdg
 #endif
 
@@ -76,15 +76,15 @@ extern "C" {
 #define DEBUG_UART_RX           PA_3
 
 //Radio specific pinout and peripherals
-#define RADIO_NRST              PA_0
+#define RADIO_NRST              PB_10
 #define RADIO_SPI_MOSI          PA_7
 #define RADIO_SPI_MISO          PA_6
-#define RADIO_SPI_SCLK          PA_5
+#define RADIO_SPI_SCLK          PA_1
 #define RADIO_NSS               PA_8
 #define RADIO_DIOX              PB_4
-#define RADIO_BUSY_PIN          PB_3
+#define RADIO_BUSY_PIN          PB_5
 
-#define SX126X_RADIO_RF_SWITCH_CTRL    PA_9
+#define SX126X_RADIO_RF_SWITCH_CTRL    PB_3
 
 /* clang-format on */
 

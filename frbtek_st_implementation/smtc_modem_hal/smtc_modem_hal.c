@@ -55,7 +55,7 @@
 #if defined( STM32L073xx )
 #include "smtc_hal_eeprom.h"
 #endif
-#if defined( STM32L476xx ) || defined ( STM32U073xx )
+#if defined( STM32L476xx ) || defined ( STM32U073xx ) || defined ( STM32U083xx )
 #include "smtc_hal_flash.h"
 #endif
 
@@ -96,7 +96,7 @@
 #define ADDR_FLASH_MODEM_KEY_CONTEXT ADDR_FLASH_PAGE_255
 #endif
 
-#if defined( STM32U073xx )
+#if defined( STM32U073xx ) || defined( STM32U083xx )
 #define ADDR_FLASH_SECURE_ELEMENT_CONTEXT ADDR_FLASH_PAGE_124
 #define ADDR_FLASH_MODEM_CONTEXT ADDR_FLASH_PAGE_125
 #define ADDR_FLASH_LORAWAN_CONTEXT ADDR_FLASH_PAGE_126
@@ -150,7 +150,9 @@ void smtc_modem_hal_reset_mcu( void )
 
 void smtc_modem_hal_reload_wdog( void )
 {
+#if defined( WATCHDOG )
     hal_watchdog_reload( );
+#endif
 }
 
 /* ------------ Time management ------------*/
@@ -243,7 +245,7 @@ void smtc_modem_hal_context_restore( const modem_context_type_t ctx_type, uint32
     case CONTEXT_STORE_AND_FORWARD:
         hal_flash_read_buffer( ADDR_FLASH_STORE_AND_FORWARD + offset, buffer, size );
         break;
-#elif defined( STM32U073xx )
+#elif defined( STM32U073xx ) || defined( STM32U083xx )
         case CONTEXT_MODEM:
         hal_flash_read_buffer( ADDR_FLASH_MODEM_CONTEXT, buffer, size );
         break;
@@ -295,7 +297,7 @@ void smtc_modem_hal_context_store( const modem_context_type_t ctx_type, uint32_t
     case CONTEXT_SECURE_ELEMENT:
         hal_eeprom_write_buffer( ADDR_EEPROM_SECURE_ELEMENT_CONTEXT_OFFSET, buffer, size );
         break;
-#elif defined( STM32U073xx )
+#elif defined( STM32U073xx ) || defined( STM32U083xx )
     case CONTEXT_MODEM:
         hal_flash_erase_page( ADDR_FLASH_MODEM_CONTEXT, 1 );
         hal_flash_write_buffer( ADDR_FLASH_MODEM_CONTEXT, buffer, size );

@@ -124,7 +124,7 @@ uint8_t hal_flash_erase_page( uint32_t addr, uint8_t nb_page )
     EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
     EraseInitStruct.Page      = FirstUserPage;
     EraseInitStruct.NbPages   = nb_page;
-    EraseInitStruct.Banks     = 0;
+    EraseInitStruct.Banks     = FLASH_BANK_1;
 
     // SMTC_HAL_TRACE_INFO( "Erase page %u bank %u\r\n", FirstUserPage, bank_number );
 
@@ -246,7 +246,7 @@ void hal_flash_read_buffer( uint32_t addr, uint8_t* buffer, uint32_t size )
 
     while( FlashIndex < size )
     {
-        data8 = *( __IO uint32_t* ) ( addr + FlashIndex );
+        data8 = *( __IO uint8_t* ) ( addr + FlashIndex );
 
         buffer[FlashIndex] = data8;
 

@@ -317,10 +317,9 @@ void ral_sx126x_bsp_get_tx_cfg( const void* context, const ral_sx126x_bsp_tx_cfg
 void ral_sx126x_bsp_get_xosc_cfg( const void* context, ral_xosc_cfg_t* xosc_cfg,
                                   sx126x_tcxo_ctrl_voltages_t* supply_voltage, uint32_t* startup_time_in_tick )
 {
-    // No tcxo on Basic Modem sx1261,sx1262 or sx1268 reference boards
     *xosc_cfg = RAL_XOSC_CFG_TCXO_RADIO_CTRL;
-    *supply_voltage = SX126X_TCXO_CTRL_2_2V;
-    *startup_time_in_tick = 2;
+    *supply_voltage = SX126X_TCXO_CTRL_3_0V;
+    *startup_time_in_tick = 5;
 }
 
 void ral_sx126x_bsp_get_trim_cap( const void* context, uint8_t* trimming_cap_xta, uint8_t* trimming_cap_xtb )

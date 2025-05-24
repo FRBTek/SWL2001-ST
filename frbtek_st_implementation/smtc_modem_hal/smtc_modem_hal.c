@@ -464,7 +464,7 @@ uint32_t smtc_modem_hal_get_radio_tcxo_startup_delay_ms( void )
 #if defined( LR11XX ) && !defined( LR1121 )
     return 5;
 #else
-    return 0;
+    return 5;
 #endif
 }
 

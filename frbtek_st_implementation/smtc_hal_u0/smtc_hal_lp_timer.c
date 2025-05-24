@@ -97,9 +97,10 @@ void hal_lp_timer_start( const uint32_t milliseconds, const hal_lp_timer_irq_t* 
         delay_ms_2_tick = 0xFFFF;
     }
 
-    // TODO: CHECK INITIAL RELOAD VALUE
-    HAL_LPTIM_TimeOut_Start_IT( &TIMER_HANDLE, delay_ms_2_tick );
+    __HAL_LPTIM_AUTORELOAD_SET(&TIMER_HANDLE , 0xFFFF);
+    HAL_LPTIM_TimeOut_Start_IT( &TIMER_HANDLE, delay_ms_2_tick);
     lptim_tmr_irq = *tmr_irq;
+
 }
 
 void hal_lp_timer_stop( )
@@ -117,10 +118,9 @@ void hal_lp_timer_irq_disable( )
     HAL_NVIC_DisableIRQ( TIM6_DAC_LPTIM1_IRQn );
 }
 
-void LPTIM1_IRQHandler( void )
+void HAL_LPTIM_CompareMatchCallback( LPTIM_HandleTypeDef * timer )
 {
-    HAL_LPTIM_IRQHandler( &TIMER_HANDLE );
-    HAL_LPTIM_TimeOut_Stop( &TIMER_HANDLE );
+    HAL_LPTIM_TimeOut_Stop( timer );
 
     if( lptim_tmr_irq.callback != NULL )
     {
